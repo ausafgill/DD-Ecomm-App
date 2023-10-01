@@ -1,10 +1,12 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ecomm_app/models/hotsalesmodel.dart';
+
 import 'package:ecomm_app/widgets/categories.dart';
 import 'package:ecomm_app/widgets/hotsales.dart';
 import 'package:ecomm_app/widgets/sales_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:card_swiper/card_swiper.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -32,9 +34,8 @@ class _CartScreenState extends State<HomeScreen> {
               borderSide: BorderSide.none,
             ),
             enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(
-                  20), // Circular border for enabled state
-              borderSide: BorderSide.none, // Remove border for enabled state
+              borderRadius: BorderRadius.circular(20),
+              borderSide: BorderSide.none,
             ),
           ),
         ),
@@ -89,7 +90,7 @@ class _CartScreenState extends State<HomeScreen> {
           SizedBox(
             height: 15,
           ),
-          HotSalesCatalog()
+          HottSales()
         ],
       ),
     );

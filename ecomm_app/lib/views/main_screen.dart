@@ -1,5 +1,6 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:ecomm_app/views/cart_screen.dart';
+import 'package:ecomm_app/views/confirmorder.dart';
 import 'package:ecomm_app/views/favorites.dart';
 import 'package:ecomm_app/views/home_screen.dart';
 import 'package:ecomm_app/views/profile.dart';

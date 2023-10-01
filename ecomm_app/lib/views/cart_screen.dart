@@ -1,4 +1,5 @@
 import 'package:ecomm_app/utils/provider/cartprovider.dart';
+import 'package:ecomm_app/views/payment_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -12,6 +13,7 @@ class CartScreen extends StatefulWidget {
 class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
+    double _total = CartProvider.getTotal;
     return Consumer<CartProvider>(builder: (context, value, child) {
       return Scaffold(
         appBar: AppBar(
@@ -61,36 +63,79 @@ class _CartScreenState extends State<CartScreen> {
                   borderRadius: BorderRadius.circular(10),
                   color: Colors.deepOrange,
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        Text(
-                          'Pay Now',
-                          style: TextStyle(
+                child: InkWell(
+                  onTap: () {
+                    if (CartProvider.getTotal > 0.0) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => PaymentScreen(
+                                    getTotal: _total,
+                                  )));
+                    } else {
+                      showDialog(
+                          barrierDismissible: false,
+                          context: context,
+                          builder: (context) => AlertDialog(
+                                backgroundColor: Colors.deepOrange,
+                                content: GestureDetector(
+                                  onTap: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: Row(
+                                    children: [
+                                      Text('Go Back to Shopping',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                          )),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Icon(
+                                        Icons.shopping_cart,
+                                        color: Colors.white,
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                title: Text(
+                                  'No Data in Cart',
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ));
+                    }
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            'Pay Now',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Icon(
+                            Icons.arrow_forward,
+                            color: Colors.white,
+                            size: 25,
+                          )
+                        ],
+                      ),
+                      Text(
+                        '\$ ${CartProvider.getTotal.toString()}',
+                        style: TextStyle(
                             color: Colors.white,
                             fontSize: 20,
-                          ),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Icon(
-                          Icons.arrow_forward,
-                          color: Colors.white,
-                          size: 25,
-                        )
-                      ],
-                    ),
-                    Text(
-                      '\$ ${CartProvider.getTotal.toString()}',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold),
-                    )
-                  ],
+                            fontWeight: FontWeight.bold),
+                      )
+                    ],
+                  ),
                 ),
               ),
             )

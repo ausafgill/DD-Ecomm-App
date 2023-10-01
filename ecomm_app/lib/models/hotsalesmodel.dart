@@ -11,7 +11,6 @@ class HotSales {
         name: 'Nike Shoes', imgpath: 'assets/nikeshoes.png', rating: '4.9'),
     HotSales(
         name: 'Smart Watch', imgpath: 'assets/smartwatch.png', rating: '4.8'),
-    HotSales(
-        name: 'Ladies Bag', imgpath: 'assets/Ladies Bag.png', rating: '4.7'),
+    HotSales(name: 'Sweaters', imgpath: 'assets/image5.jpg', rating: '4.7'),
   ];
 }

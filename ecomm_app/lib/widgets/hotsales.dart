@@ -1,10 +1,9 @@
+import 'package:card_swiper/card_swiper.dart';
 import 'package:ecomm_app/models/hotsalesmodel.dart';
-import 'package:ecomm_app/models/viewallmodel.dart';
-import 'package:ecomm_app/views/details.dart';
 import 'package:flutter/material.dart';
 
-class HotSalesCatalog extends StatelessWidget {
-  const HotSalesCatalog({
+class HottSales extends StatelessWidget {
+  const HottSales({
     super.key,
   });
 
@@ -14,56 +13,64 @@ class HotSalesCatalog extends StatelessWidget {
       child: SizedBox(
         height: 300,
         width: 300,
-        child: ListView.builder(
-            itemCount: HotSales.hotItemslist.length,
-            itemBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.only(top: 15, bottom: 15),
-                child: Column(
-                  children: [
-                    Container(
-                      height: 200,
-                      width: 300,
-                      decoration: BoxDecoration(
-                        color: Colors.grey.shade300,
-                        borderRadius: BorderRadius.circular(18),
-                        border: Border.all(color: Colors.deepOrange, width: 2),
-                      ),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(18),
-                        child: Image.asset(
+        child: Expanded(
+            child: Swiper(
+          itemCount: HotSales.hotItemslist.length,
+          itemWidth: 300.0,
+          itemHeight: 400.0,
+          layout: SwiperLayout.TINDER,
+          itemBuilder: ((context, index) {
+            return Stack(alignment: Alignment.bottomCenter, children: [
+              Container(
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        fit: BoxFit.fill,
+                        image: AssetImage(
                           HotSales.hotItemslist[index].imgpath,
-                          fit: BoxFit.fill,
-                        ),
+                        )),
+                    borderRadius: BorderRadius.circular(10)),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  height: 50,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                      color: Colors.grey.shade300.withOpacity(0.7),
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        HotSales.hotItemslist[index].name,
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold),
                       ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: Row(
+                      Row(
                         children: [
-                          Text(HotSales.hotItemslist[index].name,
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold)),
-                          SizedBox(
-                            width: 10,
+                          Text(
+                            HotSales.hotItemslist[index].rating,
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold),
                           ),
-                          Text(HotSales.hotItemslist[index].rating,
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold)),
                           Icon(
                             Icons.star,
                             color: Color.fromARGB(255, 255, 190, 59),
+                            size: 16,
                           )
                         ],
-                      ),
-                    )
-                  ],
+                      )
+                    ],
+                  ),
                 ),
-              );
-            }),
+              ),
+            ]);
+          }),
+        )),
       ),
     );
   }
